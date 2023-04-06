@@ -4,6 +4,9 @@ import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.ex2.entity.Memo;
 
@@ -66,6 +69,21 @@ class MemoRepositoryTest {
     @Test
     public void testDelete() {
         memoRepository.deleteById(99L);
+    }
+
+    @Test
+    public void testPageDefault() {
+        // 1페이지 10개
+        Pageable pageable = PageRequest.of(0, 10);
+        Page<Memo> result = memoRepository.findAll(pageable);
+        System.out.println("result = " + result);
+        System.out.println("----------------------------");
+        System.out.println("result.getTotalPages() = " + result.getTotalPages());
+        System.out.println("result.getTotalElements() = " + result.getTotalElements());
+        System.out.println("result.getNumber() = " + result.getNumber());
+        System.out.println("result.getSize() = " + result.getSize());
+        System.out.println("result.hasNext() = " + result.hasNext());
+        System.out.println("result.isFirst() = " + result.isFirst());
     }
 
 }
