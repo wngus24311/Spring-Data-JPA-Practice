@@ -78,12 +78,12 @@ class MemoRepositoryTest {
         Page<Memo> result = memoRepository.findAll(pageable);
         System.out.println("result = " + result);
         System.out.println("----------------------------");
-        System.out.println("result.getTotalPages() = " + result.getTotalPages());
-        System.out.println("result.getTotalElements() = " + result.getTotalElements());
-        System.out.println("result.getNumber() = " + result.getNumber());
-        System.out.println("result.getSize() = " + result.getSize());
-        System.out.println("result.hasNext() = " + result.hasNext());
-        System.out.println("result.isFirst() = " + result.isFirst());
+        System.out.println("result.getTotalPages() = " + result.getTotalPages());   // 총 페이지
+        System.out.println("result.getTotalElements() = " + result.getTotalElements()); // 전체 갯수
+        System.out.println("result.getNumber() = " + result.getNumber());   // 현재 페이지 번호 0부터 시작
+        System.out.println("result.getSize() = " + result.getSize());   // 페이지당 데이터 개수
+        System.out.println("result.hasNext() = " + result.hasNext());   // 다음 페이지 존재 여부
+        System.out.println("result.isFirst() = " + result.isFirst());   // 시작 페이지(0) 여부
     }
 
 }
