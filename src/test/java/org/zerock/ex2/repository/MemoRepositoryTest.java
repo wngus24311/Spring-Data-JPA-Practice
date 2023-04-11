@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.ex2.entity.Memo;
 
@@ -84,6 +85,32 @@ class MemoRepositoryTest {
         System.out.println("result.getSize() = " + result.getSize());   // 페이지당 데이터 개수
         System.out.println("result.hasNext() = " + result.hasNext());   // 다음 페이지 존재 여부
         System.out.println("result.isFirst() = " + result.isFirst());   // 시작 페이지(0) 여부
+
+        System.out.println("========================");
+        for (Memo memo:result.getContent()) {
+            System.out.println("memo = " + memo);
+        }
+    }
+
+    @Test
+    public void testSort() {
+        Sort sort = Sort.by("mno").ascending();
+        Sort sort1 = Sort.by("mno").descending();
+        Sort sortAll = sort.and(sort1);
+
+        Pageable pageable = PageRequest.of(0, 10, sort);
+        Pageable pageable1 = PageRequest.of(0, 10, sortAll);
+
+        Page<Memo> result = memoRepository.findAll(pageable);
+        Page<Memo> result1 = memoRepository.findAll(pageable1);
+
+        result.get().forEach(memo -> {
+            System.out.println("memo = " + memo);
+        });
+
+        result1.get().forEach(memo -> {
+            System.out.println("memo1 = " + memo);
+        });
     }
 
 }
