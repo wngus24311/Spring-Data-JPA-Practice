@@ -9,7 +9,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Ex2Application {
 
 	public static void main(String[] args) {
-		log.info("됨?");
 		SpringApplication.run(Ex2Application.class, args);
 	}
 
